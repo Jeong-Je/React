@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 
 const getAverage = numbers => {
     console.log(`평균값 계산 중...`);
@@ -10,16 +10,18 @@ const getAverage = numbers => {
 const Average = () => {
     const [list, setList] = useState([]);
     const [number, setNumber] = useState('');
+    const inputEl = useRef(null);
 
     const onChange = useCallback(e => {
         setNumber(e.target.value);
-    }, []);
+    }, []); // 빈 배열을 두 번째 파라미터에 주면 컴포넌트가 렌더링될 대 한 번만 함수가 생성됨
 
     const onInsert = useCallback(() => {
         const nextList = list.concat(parseInt(number));
         setList(nextList);
         setNumber('');
-    }, [number, list]);
+        inputEl.current.focus();
+    }, [number, list]); // number와 list를 넣게 되면 인풋 내용이 바뀌거나 새로운 항목이 추가될 때마다 함수 생성
 
     const avg = useMemo(()=> getAverage(list), [list]);
 
@@ -31,7 +33,7 @@ const Average = () => {
 
     return (
         <div>
-            <input value={number} onChange={onChange} />
+            <input value={number} onChange={onChange} ref={inputEl} />
             <button onClick={onInsert}>등록</button>
             <ul>
                 {list.map((value, index) => (
