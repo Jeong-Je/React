@@ -1,12 +1,9 @@
-@import './styles/utils';
- 
 .SassComponent {
   display: flex;
-  .box { // 일반 CSS에서는 .SassComponent .box와 마찬가지
-    background: $oc-pink-7; 
-    // @include media('<768px') {
-    //   background: $oc-gray-9;
-    // }
+  background: $oc-gray-2;
+  @include media('<768px') {
+    background: $oc-gray-9;
+  }
     cursor: pointer;
     transition: all 0.3s ease-in;
     &.red {
@@ -43,4 +40,3 @@
       background: black;
     }
   }
-}
