@@ -25,10 +25,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/info" element={<About />} />
 
         {/* 서브라우팅 */}
         <Route path="/profiles/*" element={<Profiles />} />
         <Route path="/history" element={<HistorySample />} />
+
+        <Route path="/*" element={<h1>이 페이지는 존재하지 않습니다 :(</h1>} />
       </Routes>
     </div>
   );
